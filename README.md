@@ -1,22 +1,17 @@
-# 🔍 Hybrid Search Demo: Semantic + BM25 + RRF
+# 🔍 semantic-bm25-hybrid-search
 
-A minimal, single-file Python implementation of a **hybrid search system** that combines:
-
-- **Semantic search** using dense vector embeddings  
-- **Keyword search** using BM25  
-- **Rank fusion** using **Reciprocal Rank Fusion (RRF)**  
-
-This repository is intended as a **clear, educational reference** for modern retrieval pipelines used in RAG systems, enterprise search, and LLM routing.
+A hybrid information retrieval demo combining **semantic vector search** and **BM25 keyword search**, fused using **Reciprocal Rank Fusion (RRF)**.  
+This repository provides a clear reference implementation for modern retrieval pipelines used in RAG systems, enterprise search, and LLM routing.
 
 ---
 
 ## ✨ Features
 
-- Sentence-level **semantic similarity search**
-- Classical **BM25 keyword matching**
-- **Reciprocal Rank Fusion (RRF)** for stable hybrid ranking
-- Optional weighting between semantic and lexical signals
-- Simple, readable implementation (single Python file)
+- Semantic search using dense embeddings
+- BM25 keyword-based retrieval
+- Reciprocal Rank Fusion (RRF) for hybrid ranking
+- Weighted fusion between semantic and lexical signals
+- Simple, readable, single-file Python implementation
 - No external database required (in-memory corpus)
 
 ---
@@ -26,6 +21,8 @@ This repository is intended as a **clear, educational reference** for modern ret
 ```
 .
 ├── hybrid_search_demo.py
+├── images/
+│   └── semantic-bm25-hybrid-search.jpeg
 └── README.md
 ```
 
@@ -51,8 +48,8 @@ numpy
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/hybrid-search-demo.git
-cd hybrid-search-demo
+git clone https://github.com/your-username/semantic-bm25-hybrid-search.git
+cd semantic-bm25-hybrid-search
 ```
 
 ### 2. (Recommended) Create a virtual environment
@@ -68,8 +65,6 @@ source venv/bin/activate    # macOS / Linux
 ```bash
 pip install sentence-transformers rank-bm25 numpy
 ```
-
-> The embedding model will be downloaded automatically on first run.
 
 ---
 
@@ -94,45 +89,29 @@ python hybrid_search_demo.py \
 
 ---
 
-## 🧾 Example Output
+## 🧠 How Hybrid Search Works
+
+<p align="center">
+  <img src="images/semantic-bm25-hybrid-search.jpeg" alt="Hybrid Search Flow with Semantic Search, BM25, and RRF" width="700">
+</p>
+
+The system retrieves documents using two independent strategies:
+
+1. **Semantic Search** – captures meaning using vector embeddings and cosine similarity  
+2. **BM25 Keyword Search** – captures exact lexical relevance  
+
+Each method produces a ranked list, which is fused using **Reciprocal Rank Fusion (RRF)**.
+
+**Reciprocal Rank Fusion (RRF):**
 
 ```
-=== Semantic (cosine) Top ===
-[0] score=0.7421 | Our refund policy allows returns within 14 days for unused subscriptions.
-[3] score=0.6984 | To request a refund, contact support with your invoice number and reason.
-
-=== BM25 Top ===
-[0] score=2.1134 | Our refund policy allows returns within 14 days for unused subscriptions.
-[3] score=1.8942 | To request a refund, contact support with your invoice number and reason.
-
-=== RRF Fused Top ===
-[0] score=0.0323 | Our refund policy allows returns within 14 days for unused subscriptions.
-[3] score=0.0315 | To request a refund, contact support with your invoice number and reason.
+RRF(d) = Σᵢ wᵢ / (k + rankᵢ(d))
 ```
 
----
-
-## 🔧 How It Works
-
-### 1. Semantic Search
-- Uses **Sentence-Transformers** embeddings
-- Computes cosine similarity between query and documents
-
-### 2. BM25 Keyword Search
-- Uses **rank-bm25**
-- Token-based lexical scoring
-
-### 3. Reciprocal Rank Fusion (RRF)
-
-RRF score for a document:
-
-```
-RRF(d) = Σ ( w_i / (k + rank_i(d)) )
-```
-
-Where:
-- `k` controls rank smoothing (commonly `60`)
-- `wᵢ` is the weight of each retrieval method
+where:
+- `k` = RRF constant (commonly 60)
+- `wᵢ` = weight of ranking list *i*
+- `rankᵢ(d)` = rank position of document *d* in list *i*
 
 ---
 
@@ -152,7 +131,7 @@ Where:
 - Add **Relative Score Fusion (RSF)** for comparison
 - Expose as a **FastAPI** service
 - Add cross-encoder re-ranking
-- Integrate directly with LLM response generation
+- Integrate retrieval with LLM generation
 
 ---
 
@@ -172,4 +151,4 @@ MIT License
 
 ## ⭐ Notes
 
-This project is intentionally kept small and readable to make hybrid retrieval concepts easy to understand and extend.
+This project is intentionally kept minimal to clearly demonstrate hybrid retrieval and rank fusion concepts.
