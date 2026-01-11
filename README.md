@@ -1,6 +1,6 @@
 # 🔍 semantic-bm25-hybrid-search
 
-A hybrid information retrieval demo combining **semantic vector search** and **BM25 keyword search**, fused using **Reciprocal Rank Fusion (RRF)**.  
+A hybrid information retrieval combining **semantic vector search** and **BM25 keyword search**, fused using **Reciprocal Rank Fusion (RRF)**.  
 This repository provides a clear reference implementation for modern retrieval pipelines used in RAG systems, enterprise search, and LLM routing.
 
 ---
@@ -48,7 +48,7 @@ numpy
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/semantic-bm25-hybrid-search.git
+git clone https://github.com/lakruwan1/semantic-bm25-hybrid-search
 cd semantic-bm25-hybrid-search
 ```
 
@@ -125,30 +125,12 @@ where:
 
 ---
 
-## 🔄 Possible Extensions
-
-- Replace in-memory documents with **Qdrant**, **FAISS**, or **Chroma**
-- Add **Relative Score Fusion (RSF)** for comparison
-- Expose as a **FastAPI** service
-- Add cross-encoder re-ranking
-- Integrate retrieval with LLM generation
-
----
-
 ## 📚 References
 
-- Cormack et al., *Reciprocal Rank Fusion*, SIGIR 2009  
-- Robertson et al., *BM25 and Probabilistic Retrieval*  
-- Sentence-Transformers: https://www.sbert.net  
+- Cormack, G. V., Clarke, C. L. A., & Buettcher, S. (2009). *Reciprocal Rank Fusion Outperforms Condorcet and Individual Rank Learning Methods.* Proceedings of the 32nd ACM SIGIR Conference on Research and Development in Information Retrieval (SIGIR ’09), ACM, pp. 758–759.
 
----
+- Robertson, S. E., & Zaragoza, H. (2009). *The Probabilistic Relevance Framework: BM25 and Beyond.* Foundations and Trends® in Information Retrieval, 3(4), 333–389.
 
-## 📜 License
+- Reimers, N., & Gurevych, I. (2019). *Sentence-BERT: Sentence Embeddings using Siamese BERT-Networks.* Proceedings of EMNLP-IJCNLP 2019. https://www.sbert.net
 
-MIT License
 
----
-
-## ⭐ Notes
-
-This project is intentionally kept minimal to clearly demonstrate hybrid retrieval and rank fusion concepts.
