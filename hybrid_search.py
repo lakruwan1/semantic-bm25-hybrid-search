@@ -1,17 +1,9 @@
 #!/usr/bin/env python3
 """
-hybrid_search_demo.py
-
-Simple hybrid search demo:
+Simple hybrid search:
 - Semantic search (Sentence-Transformers embeddings + cosine similarity)
 - BM25 (rank-bm25)
 - Rank fusion with RRF (Reciprocal Rank Fusion)
-
-Install:
-  pip install sentence-transformers rank-bm25 numpy
-
-Run:
-  python hybrid_search_demo.py --query "refund policy for subscription" --topk 5
 """
 
 from __future__ import annotations
@@ -173,7 +165,7 @@ def main():
     parser.add_argument("--model", default="all-MiniLM-L6-v2", help="Sentence-Transformers model name")
     args = parser.parse_args()
 
-    # Example mini corpus (replace with your own docs)
+    # Example mini corpus
     docs = [
         Doc(0, "Our refund policy allows returns within 14 days for unused subscriptions."),
         Doc(1, "You can reset your password using the account settings page."),
